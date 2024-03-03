@@ -129,7 +129,7 @@ def save_card_to_database(card, deck_id, archetype_id):
         print("Card with this special_id already exists in the database.")
         return
     
-    response = supabase.table(table).insert(data).execute()
+    supabase.table(table).insert(data).execute()
     
     return card
   
@@ -143,16 +143,12 @@ if __name__ == "__main__":
         decks = extract_event_decks(archetype_html)
         
         for deck in decks:
-            if decks.index(deck) > 5:
-                break
             save_deck_to_database(deck, archetype_id)
             
             event_html = scrape_event(deck['event_id'], deck['deck_id'])
             cards = extract_cards(event_html)
             
             for card in cards:
-                if decks.index(deck) > 3:
-                  break
                 saved_card = save_card_to_database(card, deck['deck_id'], archetype_id)
                 
                 if saved_card is None:
