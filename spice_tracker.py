@@ -134,11 +134,25 @@ def save_card_to_database(card, deck_id, archetype_id):
     return card
   
 if __name__ == "__main__":
-    favorite_archetypes = [985]
+    favorite_modern_archetypes = {
+        918: "Rakdos Scam",
+        300: "Zoo",
+        636: "Death's Shadow",
+        351: "Prowess",
+        819: "Mono B Rack",
+        191: "Yawg",
+        302: "Coffers",
+        1592: "Ring Control",
+        375: "UR Control",
+        233: "Living End",
+        998: "Creativity",
+        348: "Titan",
+        312: "Goryo's"
+    }
 
     new_spice = {}
     
-    for archetype_id in favorite_archetypes:
+    for archetype_id in favorite_modern_archetypes.keys():
         archetype_html = scrape_archetypes(archetype_id)
         decks = extract_event_decks(archetype_html)
         
